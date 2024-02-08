@@ -1,4 +1,4 @@
-interface WuiQueryOptions {
+export interface WuiQueryOptions {
   persistent: boolean; // true means it can "resolve" multiple times
   request: string; // fully Request for WUI
   onSuccess: (successResponseObjectString: string) => void; // callback for success
@@ -69,6 +69,23 @@ export function registerEventListener<payload_t = Record<string, unknown>>(
     onFailure: function (error_code: number, error_message: string) {
       throw new Error(
         `Failed to register event listener for event ${eventName} error_code: ${error_code} error_message: ${error_message}`
+      );
+    },
+  });
+}
+
+export function unregisterEventListener(eventName: string): void {
+  checkWuiSupported();
+
+  globalThis.window.WuiQueryCancel({
+    persistent: true,
+    request: JSON.stringify({ wuiEventName: eventName }),
+    onSuccess: function () {
+      // do nothing
+    },
+    onFailure: function (error_code: number, error_message: string) {
+      throw new Error(
+        `Failed to unregister event listener for event ${eventName} error_code: ${error_code} error_message: ${error_message}`
       );
     },
   });
