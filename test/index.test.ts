@@ -1,23 +1,28 @@
-import { myPackage, myPackage2 } from '../src';
+import { WuiSupported } from '../src/index';
+
+let windowSpy: jest.SpyInstance;
+
+beforeEach(() => {
+  windowSpy = jest.spyOn(global as any, 'window', 'get');
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 describe('index', () => {
-  describe('myPackage', () => {
-    it('should return a string containing the message', () => {
-      const message = 'Hello';
-
-      const result = myPackage(message);
-
-      expect(result).toMatch(message);
+  describe('Basic mock test', () => {
+    it('without wui its undefined', () => {
+      expect(WuiSupported()).toBe(false);
     });
-  });
 
-  describe('otherfunk', () => {
-    it('should return a string containing the message', () => {
-      const message = 'Hello';
+    it('Mimic wui and check', () => {
+      windowSpy.mockImplementation(() => ({
+        WuiQuery: () => {},
+        WuiQueryCancel: () => {},
+      }));
 
-      const result = myPackage2(message);
-
-      expect(result).toMatch(message);
+      expect(WuiSupported()).toBe(true);
     });
   });
 });
