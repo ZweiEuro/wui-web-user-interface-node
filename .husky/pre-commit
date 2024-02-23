@@ -3,6 +3,7 @@
 
 
 npx lint-staged
+npx sort-package-json
 
 
 currentBranch=$(git branch --show-current)

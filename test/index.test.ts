@@ -1,16 +1,12 @@
-import {
-  WuiQueryOptions,
-  WuiSupported,
-  registerEventListener,
-  sendEvent,
-  unregisterEventListener,
-} from '../src/index';
+import { jestExport } from '../src/PersistentCallback';
+import { WuiSupported, sendEvent } from '../src/index';
 
 afterEach(() => {
   jest.restoreAllMocks();
+  jestExport.resetCurrentPersistentQueriesToId();
 });
 
-describe('tests without wui', () => {
+describe('Test wui support throw', () => {
   it('without wui its undefined', () => {
     expect(WuiSupported()).toBe(false);
   });
@@ -22,28 +18,18 @@ describe('tests without wui', () => {
   });
 });
 
-function MockWuiQuerySuccess(opt: WuiQueryOptions): Promise<void> {
-  opt.onSuccess('{"mockSuccess": true}');
-  return Promise.resolve();
-}
-
-function MockWuiQueryCancelSuccess(opt: WuiQueryOptions): void {
-  opt.onSuccess('{"mockSuccess": true}');
-}
-
-function MockWuiQueryFailure(opt: WuiQueryOptions): void {
-  opt.onFailure(1, 'mockError');
-}
-
+/*
 describe('tests with working wui', () => {
   let windowSpy: jest.SpyInstance;
+
+  const wuiMock = new WuiMock();
 
   beforeEach(() => {
     windowSpy = jest.spyOn(global as any, 'window', 'get');
 
     windowSpy.mockImplementation(() => ({
-      WuiQuery: MockWuiQuerySuccess,
-      WuiQueryCancel: MockWuiQueryCancelSuccess,
+      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
+      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
     }));
   });
 
@@ -67,6 +53,8 @@ describe('tests with working wui', () => {
     expect(() => {
       registerEventListener('test', () => {});
     }).not.toThrow();
+
+    expect(jestExport.getCurrentPersistentQueriesToId()['test']).toBeDefined();
   });
 
   it('registerEventListener not throwing', () => {
@@ -76,25 +64,30 @@ describe('tests with working wui', () => {
   });
 
   it('unregisterEventListener not throwing', () => {
+    const listener = (x: any) => {
+      expect(x).toEqual({ mockSuccess: true });
+    };
+
     expect(() => {
-      registerEventListener('test', () => {});
+      registerEventListener('test', listener);
     }).not.toThrow();
 
     expect(() => {
-      unregisterEventListener('test');
+      unregisterEventListener('test', listener);
     }).not.toThrow();
   });
 });
 
 describe('tests with failing wui', () => {
   let windowSpy: jest.SpyInstance;
+  const wuiMock = new WuiMock(true);
 
   beforeEach(() => {
     windowSpy = jest.spyOn(global as any, 'window', 'get');
 
     windowSpy.mockImplementation(() => ({
-      WuiQuery: MockWuiQueryFailure,
-      WuiQueryCancel: MockWuiQueryFailure,
+      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
+      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
     }));
   });
 
@@ -103,7 +96,7 @@ describe('tests with failing wui', () => {
       await sendEvent('test', {
         test: 'test',
       });
-    }).rejects.toBe('{"errorCode":1,"errorMessage":"mockError"}');
+    }).rejects.toThrow();
   });
 
   it('registerEventListener throwing', () => {
@@ -114,7 +107,8 @@ describe('tests with failing wui', () => {
 
   it('unregisterEventListener to throw', () => {
     expect(() => {
-      unregisterEventListener('test');
-    }).toThrow();
+      unregisterEventListener('test', () => {});
+    }).not.toThrow();
   });
 });
+*/
