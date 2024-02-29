@@ -1,26 +1,26 @@
 image: node:latest
 
 stages:
-  - setup
   - test
   - deploy
 
-setup:
-  stage: setup
-  script:
-    - npm ci --include=dev
-  tags:
-    - setup
-  artifacts:
-    paths:
-      - node_modules/
-    expire_in: 1 hour
+# setup:
+#   stage: setup
+#   script:
+#     - npm ci --include=dev
+#   tags:
+#     - setup
+#   artifacts:
+#     paths:
+#       - node_modules/
+#     expire_in: 1 hour
 
 test-package:
   stage: test
   dependencies:
     - setup
   script:
+    - npm ci --include=dev
     - npm run test:ci
   tags:
     - test
@@ -34,9 +34,9 @@ test-package:
 publish-npm:
   stage: deploy
   dependencies:
-    - setup
     - test-package
   script:
+    - npm ci --include=dev
     - echo "@scope:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
     - npm publish
