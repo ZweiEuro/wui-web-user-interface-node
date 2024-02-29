@@ -14,7 +14,7 @@ if [ "$currentBranch" = "master" ] || [ "$currentBranch" = "main" ] || [ "$curre
   echo "Running tests and enforcing coverage"
   npm run build --noEmit --silent
   
-  npm run test --silent --bail --coverage --coverageReporters='json-summary' 2> /dev/null
+  npm run test:ci --silent --bail --coverage --coverageReporters='json-summary' 2> /dev/null
   
   # Get the coverage percentage and fail if its less than 90%
   pct=$(cat coverage/coverage-summary.json | jq '.total."lines"."pct"')
