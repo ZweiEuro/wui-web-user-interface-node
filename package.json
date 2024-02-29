@@ -37,8 +37,9 @@
     "lint": "eslint ./src/ --fix",
     "prepare": "husky install",
     "release": "semantic-release",
-    "test": "jest --silent --bail --coverage",
-    "test:ci": "jest --silent --bail --coverage --coverageReporters='json-summary'",
+    "test": "jest --silent --bail --coverage --coverageReporters='text-summary'",
+    "test:ci": "jest --silent --bail --coverage --coverageReporters='cobertura'",
+    "test:husky": "jest --silent --bail --coverage --coverageReporters='json-summary'",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit"
   },

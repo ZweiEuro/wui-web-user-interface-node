@@ -1,24 +1,40 @@
 image: node:latest
 
 stages:
+  - setup
   - test
   - deploy
 
-test-package:
-  stage: test
+setup:
+  stage: setup
   script:
-    - npm install --include=dev
-    - npm test
+    - npm ci --include=dev
   tags:
-    - test
+    - setup
   artifacts:
     paths:
       - node_modules/
-    expire_in: 1 week
+    expire_in: 1 hour
+
+test-package:
+  stage: test
+  dependencies:
+    - setup
+  script:
+    - npm run test:ci
+  tags:
+    - test
+  artifacts:
+    when: always
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
 
 publish-npm:
   stage: deploy
-  dependencies:
+    dependencies:
+    - setup
     - test-package
   script:
     - echo "@scope:registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/" > .npmrc
@@ -29,7 +45,3 @@ publish-npm:
     - main
   tags:
     - build
-  artifacts:
-    paths:
-      - .npmrc
-    expire_in: 1 week
