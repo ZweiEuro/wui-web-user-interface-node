@@ -9,6 +9,8 @@ test-package:
   script:
     - npm install --include=dev
     - npm test
+  tags:
+    - test
 
 publish-npm:
   stage: deploy
@@ -21,3 +23,5 @@ publish-npm:
   only:
     - master
     - main
+  tags:
+    - build
