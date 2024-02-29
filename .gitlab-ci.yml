@@ -11,6 +11,10 @@ test-package:
     - npm test
   tags:
     - test
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 week
 
 publish-npm:
   stage: deploy
@@ -25,3 +29,7 @@ publish-npm:
     - main
   tags:
     - build
+  artifacts:
+    paths:
+      - .npmrc
+    expire_in: 1 week
