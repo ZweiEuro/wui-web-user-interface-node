@@ -17,8 +17,6 @@ stages:
 
 test-package:
   stage: test
-  dependencies:
-    - setup
   script:
     - npm ci --include=dev
     - npm run test:ci
