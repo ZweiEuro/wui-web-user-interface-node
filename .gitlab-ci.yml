@@ -33,7 +33,7 @@ test-package:
 
 publish-npm:
   stage: deploy
-    dependencies:
+  dependencies:
     - setup
     - test-package
   script:
