@@ -30,7 +30,6 @@ test-package:
       - coverage/
     when: always
     reports:
-      cobertura: coverage/cobertura-coverage.xml
       junit: junit.xml
       coverage_report:
         coverage_format: cobertura

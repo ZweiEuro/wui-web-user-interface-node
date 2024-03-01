@@ -52,6 +52,9 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "dependencies": {
+    "eslint-plugin-jest": "^27.9.0"
+  },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "10.0.1",
@@ -97,8 +100,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "eslint-plugin-jest": "^27.9.0"
   }
 }
