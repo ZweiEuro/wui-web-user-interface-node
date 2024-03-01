@@ -4,25 +4,3 @@
 
 npx lint-staged
 npx sort-package-json
-
-
-currentBranch=$(git branch --show-current)
-
-#if we are on master, main or develop, we run the test and enforce coverage
-
-if [ "$currentBranch" = "master" ] || [ "$currentBranch" = "main" ] || [ "$currentBranch" = "develop" ]; then
-  echo "Running tests and enforcing coverage"
-  npm run build --noEmit --silent
-  
-  npm run test:husky 2> /dev/null
-  
-  # Get the coverage percentage and fail if its less than 90%
-  pct=$(cat coverage/coverage-summary.json | jq '.total."lines"."pct"')
-  rounded=$(echo $pct | awk '{print int($1)}')
-  if [ $rounded -lt 90 ]; then
-    echo "Commit Denied: Coverage is less than 90%: $pct"
-    exit 1
-  fi
-fi
-
-

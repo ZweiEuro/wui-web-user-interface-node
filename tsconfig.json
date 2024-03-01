@@ -69,6 +69,7 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   },
   "include": [
+    "./*.ts", // Include config files
     "src/**/*.ts",
     "test/**/*.ts",
     "test/testSetup.js",
