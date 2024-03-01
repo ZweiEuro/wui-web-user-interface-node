@@ -39,7 +39,7 @@
     "release": "semantic-release",
     "semantic-release": "semantic-release",
     "test": "jest --silent --bail --coverage --coverageReporters text-summary",
-    "test:ci": "jest --silent --config ./jest.config.js --collectCoverage --coverageDirectory=\"./coverage\" --ci --reporters=default --reporters=jest-junit --watchAll=false",
+    "test:ci": "jest --config jest.ci.config.ts",
     "test:husky": "jest --silent --bail --coverage --coverageReporters json-summary",
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit"
@@ -97,5 +97,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "eslint-plugin-jest": "^27.9.0"
   }
 }

@@ -30,6 +30,8 @@ test-package:
       - coverage/
     when: always
     reports:
+      cobertura: coverage/cobertura-coverage.xml
+      junit: junit.xml
       coverage_report:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
@@ -45,7 +47,6 @@ publish-npm:
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" >> .npmrc
     - npm run semantic-release
   only:
-    - master
     - main
   tags:
     - build
