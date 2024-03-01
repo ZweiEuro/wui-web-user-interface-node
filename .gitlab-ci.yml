@@ -18,7 +18,7 @@ setup:
 
 test-package:
   stage: test
-  image: node:12
+  image: node:20
   script:
     - npm run test:ci
   tags:
