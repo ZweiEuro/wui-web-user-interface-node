@@ -70,6 +70,7 @@
   },
   "include": [
     "./*.ts", // Include config files
+    "./*.cjs",
     "src/**/*.ts",
     "test/**/*.ts",
     "test/testSetup.js",
