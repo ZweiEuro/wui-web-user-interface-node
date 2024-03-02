@@ -1,6 +1,6 @@
 # @zweieuro/web-user-interface
 
-PUT BADGES HERE LATER
+Release of npm module.
 
 > My awesome module
 
