@@ -50,7 +50,8 @@ publish-npm:
     - setup
   script:
     - cat .npmrc
-    - npm publish --access public --cache .npm #npm run semantic-release --cache .npm
+    - npm run build --cache .npm #npm run semantic-release --cache .npm
+    - npm publish --cache .npm
   only:
     - main
   tags:

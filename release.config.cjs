@@ -75,18 +75,6 @@ module.exports = {
       },
     ],
     [
-      '@semantic-release/gitlab',
-      {
-        gitlabUrl: 'https://gitlab.zweieuro.at',
-      },
-    ],
-    [
-      '@semantic-release/changelog',
-      {
-        changelogFile: 'CHANGELOG.md',
-      },
-    ],
-    [
       '@semantic-release/changelog',
       {
         changelogFile: 'CHANGELOG.md',
