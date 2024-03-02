@@ -2,6 +2,8 @@
 
 Release of npm module.
 
+Make a fix push
+
 > My awesome module
 
 ## Install
