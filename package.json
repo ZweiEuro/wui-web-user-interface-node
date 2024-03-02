@@ -1,5 +1,5 @@
 {
-  "name": "@zweieuro/web-user-interface",
+  "name": "@wui/web-user-interface-linker",
   "version": "0.0.1",
   "description": "Renderer side code for the WUI (Web User Interface) library.",
   "bugs": {
