@@ -1,18 +1,8 @@
 import { registerEventListener, unregisterEventListener } from '../src';
 import { jestExport } from '../src/PersistentCallback';
-import {
-  unregisterFailureCallback,
-  registerFailureCallback,
-} from '../src/index';
-import { WuiMock } from './wuiMock';
+import { unregisterFailureCallback } from '../src/index';
 
-afterEach(() => {
-  jest.restoreAllMocks();
-  jest.clearAllMocks();
-  jestExport.resetCurrentPersistentQueriesToId();
-
-  unregisterFailureCallback();
-});
+import { WuiMock, setupWuiMock } from './wuiMock';
 
 const listener = jest.fn((payload: any) => {
   expect(payload).toEqual({ mockSuccess: true });
@@ -24,20 +14,10 @@ const failureCallackMock = jest.fn((code: number, msg: string) => {
 });
 
 describe('tests no throw', () => {
-  let windowSpy: jest.SpyInstance;
-
   const wuiMock = new WuiMock(false, false, false, false);
 
   beforeEach(() => {
-    windowSpy = jest.spyOn(global as any, 'window', 'get');
-
-    windowSpy.mockImplementation(() => ({
-      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
-      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
-    }));
-
-    // do not register a callback so the listener should give us an error
-    //registerFailureCallback(failureCallackMock);
+    setupWuiMock(wuiMock);
   });
 
   it('and unsub working normally', () => {
@@ -49,6 +29,8 @@ describe('tests no throw', () => {
 
     // send system failure message
     wuiMock.wuiMockFailureAll();
+
+    expect(console.warn).toHaveBeenCalledTimes(1);
 
     // unsubscribe
     expect(unregisterEventListener('test', listener)).toBe(true);
@@ -89,18 +71,10 @@ describe('tests no throw', () => {
 });
 
 describe('tests failure callback', () => {
-  let windowSpy: jest.SpyInstance;
   const wuiMock = new WuiMock(false, false, false, false);
 
   beforeEach(() => {
-    windowSpy = jest.spyOn(global as any, 'window', 'get');
-
-    windowSpy.mockImplementation(() => ({
-      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
-      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
-    }));
-
-    registerFailureCallback(failureCallackMock);
+    setupWuiMock(wuiMock, failureCallackMock);
   });
 
   it('failure on register and unregister', () => {
@@ -110,22 +84,24 @@ describe('tests failure callback', () => {
 
     // expect the failure callback to be called once
     expect(failureCallackMock).toHaveBeenCalledTimes(1);
+
+    unregisterFailureCallback();
+
+    wuiMock.wuiMockFailureAll(); // send failure to everone
+
+    // expect the failure callback to be called once
+    expect(failureCallackMock).toHaveBeenCalledTimes(1);
+
+    // and now console.warn should have been called
+    expect(console.warn).toHaveBeenCalledTimes(1);
   });
 });
 
 describe('throw on cancel', () => {
-  let windowSpy: jest.SpyInstance;
   const wuiMock = new WuiMock(false, true, false, false);
 
   beforeEach(() => {
-    windowSpy = jest.spyOn(global as any, 'window', 'get');
-
-    windowSpy.mockImplementation(() => ({
-      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
-      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
-    }));
-
-    registerFailureCallback(failureCallackMock);
+    setupWuiMock(wuiMock, failureCallackMock);
   });
 
   it('failure on cancel', () => {
@@ -138,23 +114,17 @@ describe('throw on cancel', () => {
 });
 
 describe('failure on cancel', () => {
-  let windowSpy: jest.SpyInstance;
   const wuiMock = new WuiMock(false, false, false, true);
 
   beforeEach(() => {
-    windowSpy = jest.spyOn(global as any, 'window', 'get');
-
-    windowSpy.mockImplementation(() => ({
-      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
-      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
-    }));
-
-    registerFailureCallback(failureCallackMock);
+    setupWuiMock(wuiMock, failureCallackMock);
   });
 
   it('failure on cancel', () => {
     registerEventListener('test', listener); // success
     unregisterEventListener('test', listener);
+
+    expect(console.error).toHaveBeenCalledTimes(1);
 
     // expect the failure callback to be called twice
     expect(failureCallackMock).toHaveBeenCalledTimes(1);

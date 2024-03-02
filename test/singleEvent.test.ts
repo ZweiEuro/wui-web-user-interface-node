@@ -1,6 +1,6 @@
 import { jestExport } from '../src/PersistentCallback';
 import { sendEvent } from '../src/index';
-import { WuiMock } from './wuiMock';
+import { WuiMock, setupWuiMock } from './wuiMock';
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -8,17 +8,10 @@ afterEach(() => {
 });
 
 describe('test no throw', () => {
-  let windowSpy: jest.SpyInstance;
-
   const wuiMock = new WuiMock(false, false, false, false);
 
   beforeEach(() => {
-    windowSpy = jest.spyOn(global as any, 'window', 'get');
-
-    windowSpy.mockImplementation(() => ({
-      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
-      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
-    }));
+    setupWuiMock(wuiMock);
   });
 
   it('sendEvent not throwing', () => {
@@ -39,16 +32,10 @@ describe('test no throw', () => {
 });
 
 describe('test throw query', () => {
-  let windowSpy: jest.SpyInstance;
   const wuiMock = new WuiMock(true, false, false, false);
 
   beforeEach(() => {
-    windowSpy = jest.spyOn(global as any, 'window', 'get');
-
-    windowSpy.mockImplementation(() => ({
-      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
-      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
-    }));
+    setupWuiMock(wuiMock);
   });
 
   it('sendEvent throwing', async () => {
@@ -61,16 +48,10 @@ describe('test throw query', () => {
 });
 
 describe('test failure query', () => {
-  let windowSpy: jest.SpyInstance;
   const wuiMock = new WuiMock(false, false, true, false);
 
   beforeEach(() => {
-    windowSpy = jest.spyOn(global as any, 'window', 'get');
-
-    windowSpy.mockImplementation(() => ({
-      WuiQuery: wuiMock.wuiQuery.bind(wuiMock),
-      WuiQueryCancel: wuiMock.wuiQueryCancel.bind(wuiMock),
-    }));
+    setupWuiMock(wuiMock);
   });
 
   it('sendEvent throwing', async () => {

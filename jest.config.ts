@@ -1,20 +1,23 @@
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  testMatch: ['**/test/**/*.test.ts'],
+  testMatch: ['<rootDir>/test/**/*.test.{ts,tsx}'],
+  setupFilesAfterEnv: ['<rootDir>/test/jest.setup.ts'],
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.ts',
-    '!<rootDir>/src/types/**/*.ts',
+    '<rootDir>/src/**/*.{ts,tsx}',
+    '!<rootDir>/node_modules/',
   ],
-  transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
-      {
-        //the content you'd placed at "global"
-        diagnostics: false,
-        isolatedModules: true,
-        tsconfig: 'tsconfig.json',
-      },
-    ],
-  },
+  clearMocks: true,
+  rootDir: '.',
+  collectCoverage: true,
+  bail: true,
+  coverageReporters: ['text'],
+  transform: { '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }] },
+  maxWorkers: 20,
+  moduleFileExtensions: ['ts', 'tsx', 'js'],
+  transformIgnorePatterns: ['/node_modules/'],
 };
+
+export default config;
