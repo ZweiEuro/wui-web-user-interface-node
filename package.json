@@ -102,7 +102,7 @@
     "node": ">=20.0"
   },
   "publishConfig": {
-    "access": "public",
-    "registry": "https://gitlab.zweieuro.at/"
+    "@zweieuro:registry": "https://gitlab.zweieuro.at/api/v4/projects/project_id/packages/npm/",
+    "access": "public"
   }
 }
