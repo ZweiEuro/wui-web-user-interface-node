@@ -50,9 +50,8 @@ publish-npm:
     - setup
   script:
     - cat .npmrc
-    - npm run build --cache .npm #npm run semantic-release --cache .npm
-    - npm version --allow-same-version --no-git-tag-version ${CI_COMMIT_TAG}
-    - npm publish --cache .npm
+    - npm run build --cache
+    - npm run semantic-release --cache .npm
   only:
     - main
   tags:

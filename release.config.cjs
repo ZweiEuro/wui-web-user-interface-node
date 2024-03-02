@@ -83,10 +83,15 @@ module.exports = {
     [
       '@semantic-release/gitlab',
       {
-        asserts: ['package.json', 'CHANGELOG.md'],
+        assets: [
+          { path: 'package.json', label: 'Module' },
+          { path: 'CHANGELOG.md', label: 'Changelog' },
+        ],
+
         gitlabUrl: 'https://gitlab.zweieuro.at',
       },
     ],
+    '@semantic-release/npm',
     [
       '@semantic-release/git',
       {
@@ -95,6 +100,5 @@ module.exports = {
           'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
-    '@semantic-release/npm',
   ],
 };
