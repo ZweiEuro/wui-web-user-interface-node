@@ -1,3 +1,4 @@
+import { registerFailureCallback } from '../src';
 import { WuiQueryId, WuiQueryOptions } from '../src/types';
 
 export class WuiMock {
@@ -80,4 +81,28 @@ export class WuiMock {
       query.onFailure(10, 'mockError');
     });
   }
+}
+export function setupWuiMock(
+  mock: WuiMock,
+  failureCb?: Parameters<typeof registerFailureCallback>[0]
+): { mock: WuiMock; failureCb: typeof failureCb } {
+  Object.defineProperties(window, {
+    WuiQuery: {
+      value: mock.wuiQuery.bind(mock),
+      writable: true,
+    },
+    WuiQueryCancel: {
+      value: mock.wuiQueryCancel.bind(mock),
+      writable: true,
+    },
+  });
+
+  if (failureCb) {
+    registerFailureCallback(failureCb);
+  }
+
+  return {
+    mock: mock,
+    failureCb: failureCb,
+  };
 }

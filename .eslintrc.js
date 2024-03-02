@@ -5,6 +5,9 @@ module.exports = {
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   extends: [
     'eslint:recommended',
@@ -39,4 +42,13 @@ module.exports = {
     'jest/globals': true,
   },
   ignorePatterns: ['*.js'],
+  overrides: [
+    {
+      files: ['tests/**/*'],
+      plugins: ['jest'],
+      env: {
+        'jest/globals': true,
+      },
+    },
+  ],
 };
