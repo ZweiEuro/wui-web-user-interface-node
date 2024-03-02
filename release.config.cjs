@@ -81,6 +81,13 @@ module.exports = {
       },
     ],
     [
+      '@semantic-release/gitlab',
+      {
+        asserts: ['package.json', 'CHANGELOG.md'],
+        gitlabUrl: 'https://gitlab.zweieuro.at',
+      },
+    ],
+    [
       '@semantic-release/git',
       {
         assets: ['package.json'],
