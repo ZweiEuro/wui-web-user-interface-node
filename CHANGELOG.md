@@ -1,3 +1,43 @@
+### [1.0.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v1.0.0...v1.0.1) (2024-3-2)
+
+
+### Bug Fixes
+
+* **readme:** force patch release ([a29f214](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/a29f2143ddab6d46da8ddbac6d1f5a3a1976be8a))
+
+
+### Continuous Integration
+
+* jest files as TS, add all coverage reporters, add coverage keyword ([92aa9cd](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/92aa9cd498083489a601bfb162248a66cd6cbcb7))
+* **jest:** ci and Code coverage report ([5836251](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/58362512de0ec43ffd827c5df78ef5c65e2e92af))
+* remove incorrect cobertura keyword ([4805a1c](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/4805a1c038a18629f37d02ded785ba516cba15b2))
+* repair some lint errors, add proper upstream for npm package ([2514c20](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/2514c203223968ae57c7e167c8fe1b079c009c87))
+
+
+### Miscellaneous Chores
+
+* **readme:** fix Changelog, adjust readme, release package ([0e36a35](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/0e36a35849b5e9657bc97089154ef7045cf1d063))
+
+### [1.0.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v1.0.0...v1.0.1) (2024-3-2)
+
+
+### Bug Fixes
+
+* **readme:** force patch release ([a29f214](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/a29f2143ddab6d46da8ddbac6d1f5a3a1976be8a))
+
+
+### Continuous Integration
+
+* jest files as TS, add all coverage reporters, add coverage keyword ([92aa9cd](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/92aa9cd498083489a601bfb162248a66cd6cbcb7))
+* **jest:** ci and Code coverage report ([5836251](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/58362512de0ec43ffd827c5df78ef5c65e2e92af))
+* remove incorrect cobertura keyword ([4805a1c](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/4805a1c038a18629f37d02ded785ba516cba15b2))
+* repair some lint errors, add proper upstream for npm package ([2514c20](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/2514c203223968ae57c7e167c8fe1b079c009c87))
+
+
+### Miscellaneous Chores
+
+* **readme:** fix Changelog, adjust readme, release package ([0e36a35](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/0e36a35849b5e9657bc97089154ef7045cf1d063))
+
 ## 1.0.0 (2024-3-1)
 
 
@@ -29,4 +69,3 @@
 * fully implementing semantic release ([d3a5f3f](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/d3a5f3f6ee75684b1c1653ba6d9c8648e8c73032))
 * normalize testing, add coverage report as artifact ([811db09](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/811db09182d367ba59daf9257afd518c41dbc9f2))
 * remove node_modules artifact ([5f4bf9f](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/5f4bf9f11947ab233fc8e191bfff901e306c7388))
-
