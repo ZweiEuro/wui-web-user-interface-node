@@ -1,5 +1,7 @@
-image: node:20
-cache:
+default:
+  image: node:20
+  cache:
+    key: $CI_COMMIT_REF_SLUG
   paths:
     - .npm/
     - node_modules/
@@ -20,15 +22,11 @@ setup:
   script:
     - npm ci --cache .npm --prefer-offline
     - |
-      export NPM_PROJECT_URL=$(echo "$CI_PROJECT_URL" | sed "s/${CI_PROJECT_PATH//\//\\/}/api\/v4/g")
-      export NPM_REGISTRY_PATHS=$(echo "$CI_PROJECT_URL" | sed "s/${CI_PROJECT_PATH//\//\\/}/api\/v4/g")
-      export NPMRC_URL=$(echo "$NPM_REGISTRY_PATHS" |  sed 's/[^:]*[:]//')
-      export NPMRC_INSTALL_URL=$(echo "$NPMRC_URL/packages/npm/:_authToken=$GITLAB_TOKEN")
-      export NPMRC_PUBLISH_URL=$(echo "$NPMRC_URL/projects/$CI_PROJECT_ID/packages/npm/:_authToken=$GITLAB_TOKEN")
-      export NPM_SCOPE=$(echo "$CI_PROJECT_PATH" | sed 's/[/].*$//')
-      echo "@$NPM_SCOPE:registry=$NPM_REGISTRY_PATHS/npm/" >> .npmrc
-      echo "$NPMRC_INSTALL_URL" >> .npmrc
-      echo "$NPMRC_PUBLISH_URL" >> .npmrc
+      {
+      echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/"
+      echo "${CI_API_V4_URL#https?}/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=\${CI_JOB_TOKEN}"
+      echo 
+      } | tee -a .npmrc
 
 test-package:
   stage: test
