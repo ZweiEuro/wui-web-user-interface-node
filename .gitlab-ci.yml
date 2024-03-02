@@ -28,7 +28,7 @@ stages:
 setup:
   stage: setup
   script:
-    - npm ci --include=dev
+    - npm ci --include=dev --cache .npm
   tags:
     - setup
   artifacts:
@@ -39,7 +39,7 @@ setup:
 test-package:
   stage: test
   script:
-    - npm run test:ci
+    - npm run test:ci --cache .npm
   tags:
     - test
   dependencies:
@@ -61,7 +61,7 @@ publish-npm:
     - test-package
     - setup
   script:
-    - npm run semantic-release
+    - npm run semantic-release --cache .npm
   only:
     - main
   tags:
