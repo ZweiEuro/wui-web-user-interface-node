@@ -23,8 +23,8 @@ setup:
       export NPM_PROJECT_URL=$(echo "$CI_PROJECT_URL" | sed "s/${CI_PROJECT_PATH//\//\\/}/api\/v4/g")
       export NPM_REGISTRY_PATHS=$(echo "$CI_PROJECT_URL" | sed "s/${CI_PROJECT_PATH//\//\\/}/api\/v4/g")
       export NPMRC_URL=$(echo "$NPM_REGISTRY_PATHS" |  sed 's/[^:]*[:]//')
-      export NPMRC_INSTALL_URL=$(echo "$NPMRC_URL/packages/npm/:_authToken=$OAUTH_TOKEN")
-      export NPMRC_PUBLISH_URL=$(echo "$NPMRC_URL/projects/$CI_PROJECT_ID/packages/npm/:_authToken=$OAUTH_TOKEN")
+      export NPMRC_INSTALL_URL=$(echo "$NPMRC_URL/packages/npm/:_authToken=$GITLAB_TOKEN")
+      export NPMRC_PUBLISH_URL=$(echo "$NPMRC_URL/projects/$CI_PROJECT_ID/packages/npm/:_authToken=$GITLAB_TOKEN")
       export NPM_SCOPE=$(echo "$CI_PROJECT_PATH" | sed 's/[/].*$//')
       echo "@$NPM_SCOPE:registry=$NPM_REGISTRY_PATHS/npm/" >> .npmrc
       echo "$NPMRC_INSTALL_URL" >> .npmrc
