@@ -1,6 +1,23 @@
-default:
-  image: node:20
-  before_script:
+image: node:20
+cache:
+  paths:
+    - .npm/
+    - node_modules/
+    - .npmrc
+
+variables:
+  NPM_TOKEN: ${CI_JOB_TOKEN}
+
+stages:
+  - setup
+  - test
+  - deploy
+
+setup:
+  tags:
+    - setup
+  stage: setup
+  script:
     - npm ci --cache .npm --prefer-offline
     - |
       export NPM_PROJECT_URL=$(echo "$CI_PROJECT_URL" | sed "s/${CI_PROJECT_PATH//\//\\/}/api\/v4/g")
@@ -12,29 +29,6 @@ default:
       echo "@$NPM_SCOPE:registry=$NPM_REGISTRY_PATHS/npm/" >> .npmrc
       echo "$NPMRC_INSTALL_URL" >> .npmrc
       echo "$NPMRC_PUBLISH_URL" >> .npmrc
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - .npm/
-
-variables:
-  NPM_TOKEN: ${CI_JOB_TOKEN}
-
-stages:
-  - setup
-  - test
-  - deploy
-
-setup:
-  stage: setup
-  script:
-    - npm ci --include=dev --cache .npm
-  tags:
-    - setup
-  artifacts:
-    paths:
-      - node_modules/
-    expire_in: 1 hour
 
 test-package:
   stage: test
@@ -61,6 +55,7 @@ publish-npm:
     - test-package
     - setup
   script:
+    - cat .npmrc
     - npm run semantic-release --cache .npm
   only:
     - main
