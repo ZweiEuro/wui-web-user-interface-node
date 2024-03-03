@@ -5,7 +5,6 @@ default:
     paths:
       - .npm/
       - node_modules/
-      - .npmrc
 
 variables:
   NPM_TOKEN: ${CI_JOB_TOKEN}
@@ -73,6 +72,8 @@ publish-npm:
 
   script:
     - cat .npmrc
+    - echo "home npmrc:"
+    - cat ~/.npmrc
     - npm run build --cache
     - npm run semantic-release --cache .npm
   only:
