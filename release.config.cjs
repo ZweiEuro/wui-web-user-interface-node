@@ -80,9 +80,7 @@ module.exports = {
         changelogFile: 'CHANGELOG.md',
       },
     ],
-    /* 
-   // Try without the gitlab to check token validity
-   [
+    [
       '@semantic-release/gitlab',
       {
         assets: [
@@ -92,7 +90,7 @@ module.exports = {
 
         gitlabUrl: 'https://gitlab.zweieuro.at',
       },
-    ],*/
+    ],
     '@semantic-release/npm',
     [
       '@semantic-release/git',
