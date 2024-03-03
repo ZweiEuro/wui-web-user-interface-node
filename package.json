@@ -1,6 +1,6 @@
 {
   "name": "@wui/web-user-interface-node",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Renderer side code for the WUI (Web User Interface) library.",
   "bugs": {
     "url": "https://gitlab.zweieuro.at/wui/web-user-interface-node/-/issues"
