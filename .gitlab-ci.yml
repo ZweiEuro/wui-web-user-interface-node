@@ -56,3 +56,7 @@ publish-npm:
     - main
   tags:
     - build
+  artifacts:
+    paths:
+      - .npm/
+    expire_in: 1 hour
