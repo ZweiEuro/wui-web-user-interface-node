@@ -80,7 +80,7 @@ function getPersistentCallbacksManager(eventName: string) {
 }
 
 /**
- * Register a listener for a given event name.
+ * @brief Register a listener for a given event name.
  *
  * @param eventName for which the backend is listening
  * @param callback to call when the event is received
@@ -98,7 +98,7 @@ export function registerEventListener<payload_t = Record<string, unknown>>(
 }
 
 /**
- * Unregister a listener for a given event name.
+ * @brief Unregister a listener for a given event name.
  *
  * @param eventName for which the backend is listening
  * @param callback to call when the event is received
@@ -116,12 +116,20 @@ export function unregisterEventListener<payload_t = Record<string, unknown>>(
   return manager.removeOnData(callback as (arg: unknown) => void);
 }
 
+/**
+ * @brief register a single callback that is called when any persistent query fails. If none is registered a console warning is printed instead.
+ *
+ * @param callback to call when a persistent query fails
+ */
 export function registerFailureCallback(
   callback: (errorCode: number, errorMessage: string) => void
 ): void {
   failureCallback = callback;
 }
 
+/**
+ * @brief unregister the failure callback
+ */
 export function unregisterFailureCallback(): void {
   failureCallback = undefined;
 }

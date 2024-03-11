@@ -34,6 +34,7 @@
     "build": "tsc --project tsconfig.build.json",
     "build:watch": "tsc --project tsconfig.build.json --watch",
     "clean": "rm -rf ./lib/",
+    "genDocs": "typedoc --plugin typedoc-plugin-markdown --out docs src",
     "lint": "eslint ./src/ --fix",
     "prepare": "husky install",
     "release": "semantic-release",
@@ -88,6 +89,8 @@
     "sort-package-json": "2.8.0",
     "standard-version": "9.5.0",
     "ts-jest": "29.1.2",
+    "typedoc": "0.25.12",
+    "typedoc-plugin-markdown": "3.17.1",
     "typescript": "5.3.3"
   },
   "peerDependencies": {

@@ -1,7 +1,7 @@
 import { checkWuiSupported, makeRejectString } from './types';
 
 /**
- * Send a single event to a backend destination which is listening for it.
+ * @brief Send a single event to a backend destination which is listening for it.
  *
  * @param eventName for which the backend is listening
  * @param payload

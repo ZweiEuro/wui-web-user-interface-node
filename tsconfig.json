@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "lib",
     "module": "esnext",
-    "target": "ES5",
+    "target": "ES2016",
     "lib": ["dom", "esnext"],
     "moduleResolution": "node",
     "jsx": "react",

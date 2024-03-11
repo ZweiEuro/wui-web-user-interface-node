@@ -27,9 +27,9 @@ export function makeRejectString(
 }
 
 /**
- * WUI is only supported in the WUI library and its internal functions
+ * @brief WUI is only supported in the WUI library and its internal functions. Detected via the global object.
  *
- * @returns true if WUI is supported, false otherwise
+ * @returns true if WUI is supported, false otherwise.
  */
 export function WuiSupported(): boolean {
   if (
@@ -42,7 +42,7 @@ export function WuiSupported(): boolean {
 }
 
 /**
- * throws an error if WUI is not supported
+ * @brief Check if wui is supported, will throw if it isn't.
  */
 export function checkWuiSupported(): void {
   if (!WuiSupported()) {

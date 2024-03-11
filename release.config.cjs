@@ -86,6 +86,7 @@ module.exports = {
         assets: [
           { path: 'package.json', label: 'Module' },
           { path: 'CHANGELOG.md', label: 'Changelog' },
+          { path: 'docs/*', label: 'Documentation' },
         ],
 
         gitlabUrl: 'https://gitlab.zweieuro.at',
@@ -95,7 +96,7 @@ module.exports = {
     [
       '@semantic-release/git',
       {
-        assets: ['package.json', 'CHANGELOG.md'],
+        assets: ['package.json', 'CHANGELOG.md', 'docs/*'],
         message:
           'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
