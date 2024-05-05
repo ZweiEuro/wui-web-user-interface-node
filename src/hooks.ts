@@ -10,17 +10,20 @@ export function useEventListener<T extends Record<string, unknown>>(
   const [data, setData] = useState<T | null>(null);
 
   useEffect(() => {
-    const receiver = (data: T) => {
-      setData(data);
-    };
+    let callbackIdentifier: symbol | undefined = undefined;
+
     try {
-      registerEventListener(eventName, receiver);
+      callbackIdentifier = registerEventListener(eventName, (data: T) => {
+        setData(data);
+      });
     } catch (e) {
       console.error('Error registering event listener', e);
     }
 
     return () => {
-      unregisterEventListener(eventName, receiver);
+      if (callbackIdentifier) {
+        unregisterEventListener(eventName, callbackIdentifier);
+      }
     };
   }, []);
 

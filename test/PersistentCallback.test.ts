@@ -21,7 +21,7 @@ describe('tests no throw', () => {
   });
 
   it('and unsub working normally', () => {
-    registerEventListener('test', listener);
+    const listenerSymbol = registerEventListener('test', listener);
 
     expect(jestExport.getCurrentPersistentQueriesToId()['test']).toBeDefined();
 
@@ -33,26 +33,26 @@ describe('tests no throw', () => {
     expect(console.warn).toHaveBeenCalledTimes(1);
 
     // unsubscribe
-    expect(unregisterEventListener('test', listener)).toBe(true);
+    expect(unregisterEventListener('test', listenerSymbol)).toBe(true);
   });
 
   it('unsub twice', () => {
-    registerEventListener('test', listener);
+    const listenerSymbol = registerEventListener('test', listener);
 
     expect(jestExport.getCurrentPersistentQueriesToId()['test']).toBeDefined();
 
     wuiMock.wuiMockOKAll(); // send success to everone
 
     // unsubscribe
-    expect(unregisterEventListener('test', listener)).toBe(true);
+    expect(unregisterEventListener('test', listenerSymbol)).toBe(true);
 
     // unsubscribe again
-    expect(unregisterEventListener('test', listener)).toBe(false);
+    expect(unregisterEventListener('test', listenerSymbol)).toBe(false);
   });
 
   it('unsub something that was never registered', () => {
     // unsubscribe
-    expect(unregisterEventListener('test', listener)).toBe(false);
+    expect(unregisterEventListener('test', Symbol())).toBe(false);
   });
 
   it('unregisterEventListener not throwing', () => {
@@ -60,12 +60,19 @@ describe('tests no throw', () => {
       expect(x).toEqual({ mockSuccess: true });
     };
 
-    expect(() => {
-      registerEventListener('test', listener);
-    }).not.toThrow();
+    let listenerSymbol: symbol | undefined = undefined;
 
     expect(() => {
-      unregisterEventListener('test', listener);
+      listenerSymbol = registerEventListener('test', listener);
+    }).not.toThrow();
+
+    expect(listenerSymbol).toBeDefined();
+
+    expect(() => {
+      if (listenerSymbol === undefined) {
+        throw new Error('listenerSymbol is undefined');
+      }
+      unregisterEventListener('test', listenerSymbol);
     }).not.toThrow();
   });
 });
@@ -105,10 +112,10 @@ describe('throw on cancel', () => {
   });
 
   it('failure on cancel', () => {
-    registerEventListener('test', listener);
+    const listenerSymbol = registerEventListener('test', listener);
 
     expect(() => {
-      unregisterEventListener('test', listener);
+      unregisterEventListener('test', listenerSymbol);
     }).toThrow();
   });
 });
@@ -121,8 +128,8 @@ describe('failure on cancel', () => {
   });
 
   it('failure on cancel', () => {
-    registerEventListener('test', listener); // success
-    unregisterEventListener('test', listener);
+    const listenerSymbol = registerEventListener('test', listener); // success
+    unregisterEventListener('test', listenerSymbol);
 
     expect(console.error).toHaveBeenCalledTimes(1);
 

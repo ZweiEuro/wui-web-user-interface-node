@@ -4,7 +4,7 @@ export class PersistentCallbacksManager {
   private queryId_: WuiQueryId | null = null;
   private eventName_: string;
 
-  private dataCallbacks_: Array<(arg: unknown) => void> = [];
+  private dataCallbacks_: Map<symbol, (arg: unknown) => void> = new Map();
 
   constructor(eventName: string) {
     this.eventName_ = eventName;
@@ -26,8 +26,10 @@ export class PersistentCallbacksManager {
     }
   }
 
-  addOnData(callback: (arg: unknown) => void) {
-    this.dataCallbacks_.push(callback);
+  addOnData(callback: (arg: unknown) => void): symbol {
+    const newSymbol = Symbol();
+
+    this.dataCallbacks_.set(newSymbol, callback);
 
     if (this.queryId_ === null) {
       this.queryId_ = globalThis.window.WuiQuery({
@@ -37,17 +39,18 @@ export class PersistentCallbacksManager {
         onFailure: this.onFailure.bind(this),
       });
     }
+
+    return newSymbol;
   }
 
-  removeOnData(callback: (arg: unknown) => void): boolean {
-    const index = this.dataCallbacks_.indexOf(callback);
-    if (index !== -1) {
-      this.dataCallbacks_.splice(index, 1);
-    } else {
+  removeOnData(callbackIdentifier: symbol): boolean {
+    if (!this.dataCallbacks_.has(callbackIdentifier)) {
       return false;
     }
 
-    if (this.dataCallbacks_.length === 0) {
+    this.dataCallbacks_.delete(callbackIdentifier);
+
+    if (this.dataCallbacks_.size === 0) {
       if (this.queryId_ !== null) {
         if (globalThis.window.WuiQueryCancel(this.queryId_) === false) {
           console.error(
@@ -90,11 +93,11 @@ function getPersistentCallbacksManager(eventName: string) {
 export function registerEventListener<payload_t = Record<string, unknown>>(
   eventName: string,
   callback: (payload: payload_t) => void
-): void {
+): symbol {
   checkWuiSupported();
 
   const manager = getPersistentCallbacksManager(eventName);
-  manager.addOnData(callback as (arg: unknown) => void);
+  return manager.addOnData(callback as (arg: unknown) => void);
 }
 
 /**
@@ -106,14 +109,14 @@ export function registerEventListener<payload_t = Record<string, unknown>>(
  * @returns true if the callback was removed, false otherwise (e.g. if it was not registered)
  *
  */
-export function unregisterEventListener<payload_t = Record<string, unknown>>(
+export function unregisterEventListener(
   eventName: string,
-  callback: (payload: payload_t) => void
+  callbackIdentifier: symbol
 ): boolean {
   checkWuiSupported();
 
   const manager = getPersistentCallbacksManager(eventName);
-  return manager.removeOnData(callback as (arg: unknown) => void);
+  return manager.removeOnData(callbackIdentifier);
 }
 
 /**

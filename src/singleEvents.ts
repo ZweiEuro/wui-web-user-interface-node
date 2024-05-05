@@ -23,7 +23,10 @@ export function sendEvent<
         resolve(JSON.parse(response) as successObject_t);
       },
       onFailure: function (errorCode: number, errorMessage: string) {
-        reject(makeRejectString(errorCode, errorMessage, eventName));
+        const errString = makeRejectString(errorCode, errorMessage, eventName);
+
+        console.debug('sendEvent failed', errString);
+        reject(errString);
       },
     });
   });
