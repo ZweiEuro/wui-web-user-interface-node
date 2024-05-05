@@ -2,7 +2,7 @@
 
 # @zweieuro/web-user-interface-node
 
-This is the node backend of WUI. Go to www.zweieuro.at for details.
+This is the node backend of WUI. Go https://wui.pages.zweieuro.at/web-user-interface-docs/docs/introduction to see the documentation.
 
 ## Install
 

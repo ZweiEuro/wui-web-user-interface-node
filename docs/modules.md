@@ -37,7 +37,7 @@ ___
 
 ### registerEventListener
 
-▸ **registerEventListener**\<`payload_t`\>(`eventName`, `callback`): `void`
+▸ **registerEventListener**\<`payload_t`\>(`eventName`, `callback`): `symbol`
 
 #### Type parameters
 
@@ -54,7 +54,7 @@ ___
 
 #### Returns
 
-`void`
+`symbol`
 
 **`Brief`**
 
@@ -62,7 +62,7 @@ Register a listener for a given event name.
 
 #### Defined in
 
-PersistentCallback.ts:90
+PersistentCallback.ts:93
 
 ___
 
@@ -86,7 +86,7 @@ register a single callback that is called when any persistent query fails. If no
 
 #### Defined in
 
-PersistentCallback.ts:124
+PersistentCallback.ts:127
 
 ___
 
@@ -126,20 +126,14 @@ ___
 
 ### unregisterEventListener
 
-▸ **unregisterEventListener**\<`payload_t`\>(`eventName`, `callback`): `boolean`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `payload_t` | `Record`\<`string`, `unknown`\> |
+▸ **unregisterEventListener**(`eventName`, `callbackIdentifier`): `boolean`
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `eventName` | `string` | for which the backend is listening |
-| `callback` | (`payload`: `payload_t`) => `void` | to call when the event is received |
+| `callbackIdentifier` | `symbol` | - |
 
 #### Returns
 
@@ -153,7 +147,7 @@ Unregister a listener for a given event name.
 
 #### Defined in
 
-PersistentCallback.ts:109
+PersistentCallback.ts:112
 
 ___
 
@@ -171,4 +165,4 @@ unregister the failure callback
 
 #### Defined in
 
-PersistentCallback.ts:133
+PersistentCallback.ts:136
