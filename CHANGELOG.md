@@ -1,3 +1,10 @@
+## [2.1.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.0.0...v2.1.0) (2024-07-11)
+
+
+### Features
+
+* **utility:** add prettier-eslint; add error element on body on failure & related tests ([c9be608](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/c9be60877f3b2231df750cc9ca94b22cdf9c4563))
+
 ## [2.0.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v1.0.8...v2.0.0) (2024-05-05)
 
 
