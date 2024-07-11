@@ -4,6 +4,11 @@ import {
   unregisterFailureCallback,
 } from '../src/PersistentCallback';
 
+globalThis.console = {
+  ...globalThis.console,
+  debug: jest.fn(), // swallow debug messages
+};
+
 beforeAll(() => {
   jest.spyOn(global.console, 'warn').mockImplementation(() => {});
   jest.spyOn(global.console, 'error').mockImplementation(() => {});
