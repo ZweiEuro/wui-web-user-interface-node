@@ -1,3 +1,16 @@
+## [2.3.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.2.0...v2.3.0) (2024-07-27)
+
+
+### Features
+
+* **replay tools:** implement base functionality for replay buttons and file handling ([d4393c3](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/d4393c3a1cab678c4192a7b512433b768f688c7b)), closes [#8](https://gitlab.zweieuro.at/wui/web-user-interface-node/issues/8)
+* **replaytool:** finish implementing CSV parsing and proper replay methods ([6c27127](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/6c27127b70b992ec63d9ea91eeed98346f557e6a)), closes [#8](https://gitlab.zweieuro.at/wui/web-user-interface-node/issues/8)
+
+
+### Bug Fixes
+
+* **replaytool:** fix include for replayTools file and skip invalid lines ([10595c5](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/10595c506809e50573c6b0b834364e5f5a298120)), closes [#8](https://gitlab.zweieuro.at/wui/web-user-interface-node/issues/8)
+
 ## [2.2.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.1.0...v2.2.0) (2024-07-11)
 
 ## [2.1.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.0.0...v2.1.0) (2024-07-11)
