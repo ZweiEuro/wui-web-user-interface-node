@@ -9,6 +9,7 @@ const config: Config = {
     '<rootDir>/src/**/*.{ts,tsx}',
     '!<rootDir>/node_modules/',
   ],
+  coveragePathIgnorePatterns: ['<rootDir>/src/replayTool/replayTool.ts'],
   clearMocks: true,
   rootDir: '.',
   collectCoverage: true,
