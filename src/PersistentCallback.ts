@@ -149,3 +149,9 @@ export const jestExport = {
   },
   getPersistentCallbacksManager,
 };
+
+// replayTool utility
+
+export const replayToolExport = {
+  getPersistentCallbacksManager: getPersistentCallbacksManager,
+};

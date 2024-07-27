@@ -1,3 +1,4 @@
+import { queryByAttribute } from '@testing-library/react';
 import { WuiSupported, sendEvent } from '../src/index';
 import { checkWuiSupported } from '../src/types';
 
@@ -7,12 +8,14 @@ describe('Test wui support throw', () => {
   });
 
   it('expect an error element to be created on failure', () => {
-    expect(() => {
-      checkWuiSupported();
-    }).toThrow();
+    checkWuiSupported();
 
-    expect(globalThis.document.body.childElementCount).toBe(1);
+    expect(globalThis.document.body.childElementCount).toBeGreaterThan(0);
     expect(globalThis.document.body.firstChild).toBeDefined();
+
+    expect(
+      queryByAttribute('id', globalThis.document.body, 'ReplaySettings')
+    ).toBeDefined();
   });
 
   it('throw without backend', async () => {

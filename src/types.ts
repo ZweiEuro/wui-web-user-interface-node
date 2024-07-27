@@ -1,4 +1,4 @@
-import { initializeReplayTool } from './replayTool';
+import { initializeReplayTool } from './replayTool/replayTool';
 
 export interface WuiQueryOptions {
   persistent: boolean; // true means it can "resolve" multiple times

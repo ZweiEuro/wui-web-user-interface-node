@@ -1,3 +1,7 @@
+import { parse, ParseResult } from 'papaparse';
+import { WuiQueryId } from '../types';
+import { replayToolExport } from '../PersistentCallback';
+
 const debugElementInnerHtml = `
 <div style="
 width: 100%;
@@ -61,6 +65,16 @@ let replayButton = document.getElementById('replayButton');
 // Overlay
 let replayName = document.getElementById('replayName');
 
+// CSV data
+
+type CsvRowType = {
+  timestamp: string;
+  eventName: string;
+  eventPayload: string;
+};
+
+let csvData: ParseResult<CsvRowType> | undefined = undefined;
+
 function findAllDIVs() {
   fileName = document.getElementById('fileName');
   fileInput = document.getElementById('fileInput') as HTMLInputElement | null;
@@ -77,6 +91,18 @@ export function initializeReplayTool(): void {
   } else {
     initialized = true;
   }
+
+  console.warn('WUI backend not found');
+
+  // mock away the global functions to avoid any chrashes
+  globalThis.window.WuiQuery = options => {
+    void options;
+    return 0 as WuiQueryId;
+  };
+  globalThis.window.WuiQueryCancel = options => {
+    void options;
+    return false;
+  };
 
   // The body should be all black since usually the WUI backend is running and rendering is considered empty as black
   document.body.style.backgroundColor = 'black';
@@ -103,9 +129,54 @@ function initReplay() {
 
   replayName.innerText = localStorage.getItem('wuiReplayFileName') ?? 'unknown';
 
-  setTimeout(() => {
+  // prepare replay
+  const csvStringContent = localStorage.getItem('wuiReplayCSV');
+
+  if (!csvStringContent) {
+    console.error('No CSV content found');
+    return;
+  }
+
+  csvData = parse<CsvRowType>(csvStringContent, {
+    header: true,
+    comments: '#',
+    quoteChar: "'",
+    escapeChar: '',
+  });
+
+  runReplay(0);
+}
+
+function runReplay(index: number = 0) {
+  if (!csvData) {
+    console.error('No CSV data found');
+    return;
+  }
+
+  if (index >= csvData.data.length) {
     finishReplay();
-  }, 5000);
+    return;
+  }
+
+  const row = csvData.data[index];
+
+  if (!row['timestamp'] || !row['eventName'] || !row['eventPayload']) {
+    console.warn('Invalid row', row);
+  }
+
+  const timeoutTime =
+    index == 0
+      ? Number(row.timestamp)
+      : Number(row.timestamp) - Number(csvData.data[index - 1].timestamp);
+
+  setTimeout(() => {
+    console.log('Replaying', row);
+    replayToolExport
+      .getPersistentCallbacksManager(row.eventName)
+      .onData(row.eventPayload);
+
+    runReplay(index + 1);
+  }, timeoutTime);
 }
 
 function finishReplay() {
@@ -181,8 +252,9 @@ function handleFilechange(): void {
     window.localStorage.setItem('wuiReplayCSV', text as string);
     window.localStorage.setItem('wuiReplayFileName', selectedFile.name);
 
-    if (fileName) {
+    if (fileName && replayButton) {
       fileName.innerHTML = 'Current Filename' + selectedFile.name;
+      replayButton.removeAttribute('disabled');
     }
   };
 
