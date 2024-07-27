@@ -1,5 +1,3 @@
-import { initializeReplayTool } from './replayTool/replayTool';
-
 export interface WuiQueryOptions {
   persistent: boolean; // true means it can "resolve" multiple times
   request: string; // fully Request for WUI
@@ -48,6 +46,6 @@ export function WuiSupported(): boolean {
  */
 export function checkWuiSupported(): void {
   if (!WuiSupported()) {
-    initializeReplayTool();
+    throw new Error('WUI is not supported in this environment');
   }
 }

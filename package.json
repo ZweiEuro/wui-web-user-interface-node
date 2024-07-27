@@ -25,6 +25,10 @@
     "./hooks": {
       "types": "./lib/hooks.d.ts",
       "default": "./lib/hooks.js"
+    },
+    "./replayTool": {
+      "types": "./lib/replayTool/replayTool.d.ts",
+      "default": "./lib/replayTool/replayTool.js"
     }
   },
   "files": [

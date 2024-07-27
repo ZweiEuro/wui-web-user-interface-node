@@ -162,6 +162,8 @@ function runReplay(index: number = 0) {
 
   if (!row['timestamp'] || !row['eventName'] || !row['eventPayload']) {
     console.warn('Invalid row', row);
+    runReplay(index + 1);
+    return;
   }
 
   const timeoutTime =
