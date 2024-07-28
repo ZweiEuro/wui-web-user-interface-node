@@ -1,3 +1,10 @@
+### [2.3.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.3.0...v2.3.1) (2024-07-28)
+
+
+### Bug Fixes
+
+* **replatool:** replaytoool tried to overwrite query function even if backend was present ([dda54af](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/dda54af51b37c7853f94ab534cd5a340145e0970))
+
 ## [2.3.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.2.0...v2.3.0) (2024-07-27)
 
 
