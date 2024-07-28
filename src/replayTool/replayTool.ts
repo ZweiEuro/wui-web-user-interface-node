@@ -1,5 +1,5 @@
 import { parse, ParseResult } from 'papaparse';
-import { WuiQueryId } from '../types';
+import { WuiQueryId, WuiSupported } from '../types';
 import { replayToolExport } from '../PersistentCallback';
 
 const debugElementInnerHtml = `
@@ -86,6 +86,12 @@ function findAllDIVs() {
 }
 
 export function initializeReplayTool(): void {
+
+  if (WuiSupported()) {
+    console.debug('WUI backend found, not initializing replay tool');
+    return;
+  }
+
   if (initialized) {
     return;
   } else {
