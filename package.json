@@ -35,16 +35,16 @@
     "lib"
   ],
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "build:watch": "tsc --project tsconfig.build.json --watch",
+    "build": "tsc --project buildConfigs/tsconfig.common.json",
+    "build:watch": "tsc --project buildConfigs/tsconfig.common.json --watch",
     "clean": "rm -rf ./lib/",
     "genDocs": "typedoc --plugin typedoc-plugin-markdown --out docs src",
     "lint": "eslint ./src/ --fix",
     "prepare": "husky install",
     "release": "semantic-release",
     "semantic-release": "semantic-release",
-    "test": "cross-env NODE_ENV=test jest --config jest.config.ts",
-    "test:ci": "cross-env NODE_ENV=test jest --config jest.ci.config.ts",
+    "test": "cross-env NODE_ENV=test jest --config buildConfigs/jest.config.ts",
+    "test:ci": "cross-env NODE_ENV=test jest --config buildConfigs/jest.ci.config.ts",
     "test:watch": "cross-env NODE_ENV=test test --watch",
     "typecheck": "tsc --noEmit"
   },

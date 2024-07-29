@@ -1,15 +1,9 @@
-{
+module.exports ={
   "singleQuote": true,
   "trailingComma": "es5",
   "arrowParens": "avoid",
   "printWidth": 80,
   "semi": true,
-  "importOrder": [
-    "^@core/(.*)$",
-    "^@server/(.*)$",
-    "^@ui/(.*)$",
-    "^[./]"
-  ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }
