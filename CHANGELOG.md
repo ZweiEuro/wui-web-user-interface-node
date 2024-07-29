@@ -1,3 +1,5 @@
+## [2.4.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.3.1...v2.4.0) (2024-07-29)
+
 ### [2.3.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.3.0...v2.3.1) (2024-07-28)
 
 
