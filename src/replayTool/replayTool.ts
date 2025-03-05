@@ -100,7 +100,7 @@ export function initializeReplayTool(): void {
 
   console.warn('WUI backend not found');
 
-  // mock away the global functions to avoid any chrashes
+  // mock away the global functions to avoid any crashes
   globalThis.window.WuiQuery = options => {
     void options;
     return 0 as WuiQueryId;

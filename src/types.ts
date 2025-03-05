@@ -1,6 +1,6 @@
 export interface WuiQueryOptions {
   persistent: boolean; // true means it can "resolve" multiple times
-  request: string; // fully Request for WUI
+  request: string; // request as defined by CEF message routing API
   onSuccess: (successResponseObjectString: string) => void; // callback for success
   onFailure: (failureErrorCode: number, failureErrorMessage: string) => void; // callback for failure
 }

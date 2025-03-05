@@ -25,10 +25,10 @@ describe('tests no throw', () => {
 
     expect(jestExport.getCurrentPersistentQueriesToId()['test']).toBeDefined();
 
-    wuiMock.wuiMockOKAll(); // send success to everone
+    wuiMock.wuiMockReceiveAllEvents({ mockSuccess: true }); // send success to everone
 
     // send system failure message
-    wuiMock.wuiMockFailureAll();
+    wuiMock.wuiMockFailureAllEvents(10, 'mockError');
 
     expect(console.warn).toHaveBeenCalledTimes(1);
 
@@ -41,7 +41,7 @@ describe('tests no throw', () => {
 
     expect(jestExport.getCurrentPersistentQueriesToId()['test']).toBeDefined();
 
-    wuiMock.wuiMockOKAll(); // send success to everone
+    wuiMock.wuiMockReceiveAllEvents({ mockSuccess: true }); // send success to every listener
 
     // unsubscribe
     expect(unregisterEventListener('test', listenerSymbol)).toBe(true);
@@ -87,14 +87,14 @@ describe('tests failure callback', () => {
   it('failure on register and unregister', () => {
     registerEventListener('test', listener);
 
-    wuiMock.wuiMockFailureAll(); // send failure to everone
+    wuiMock.wuiMockFailureAllEvents(10, 'mockError'); // send failure to everone
 
     // expect the failure callback to be called once
     expect(failureCallackMock).toHaveBeenCalledTimes(1);
 
     unregisterFailureCallback();
 
-    wuiMock.wuiMockFailureAll(); // send failure to everone
+    wuiMock.wuiMockFailureAllEvents(10, 'mockError'); // send failure to everone
 
     // expect the failure callback to be called once
     expect(failureCallackMock).toHaveBeenCalledTimes(1);

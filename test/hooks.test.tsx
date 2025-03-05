@@ -18,7 +18,7 @@ describe('tests no throw persistent call', () => {
     expect(result.current).toEqual(null);
 
     act(() => {
-      mock.wuiMockOKAll();
+      mock.wuiMockReceiveAllEvents({ mockSuccess: true });
     });
 
     unmount();
@@ -34,7 +34,7 @@ describe('tests no throw persistent call', () => {
     expect(result.current).toEqual(null);
 
     act(() => {
-      mock.wuiMockOKAll();
+      mock.wuiMockReceiveAllEvents({ mockSuccess: true });
     });
 
     unmount();

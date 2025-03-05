@@ -27,6 +27,11 @@ export class WuiMock {
     return this.wuiQueryIdGenerator++ as WuiQueryId;
   }
 
+  private getPersistentEventName(options: WuiQueryOptions): string {
+    const parsed = JSON.parse(options.request) as { wuiEventName: string };
+    return parsed.wuiEventName;
+  }
+
   wuiQuery(options: WuiQueryOptions): WuiQueryId {
     if (this.throwQuery_) {
       throw new Error('Test Throw');
@@ -70,16 +75,53 @@ export class WuiMock {
     return true;
   }
 
-  wuiMockOKAll() {
+  wuiMockReceiveAllEvents(payload: Record<string, unknown>) {
     this.openPersistentQueries_.forEach(query => {
-      query.onSuccess('{"mockSuccess": true}');
+      query.onSuccess(JSON.stringify(payload));
     });
   }
 
-  wuiMockFailureAll() {
+  /**
+   * Send event data to a previously opened query
+   *
+   * @param eventName
+   * @param data
+   */
+  wuiMockReceiveEvent(eventName: string, data: Record<string, unknown>) {
+    // find the query that matches the event name, throw if none is found
+    const query = Array.from(this.openPersistentQueries_.values()).find(
+      query => this.getPersistentEventName(query) === eventName
+    );
+
+    if (!query) {
+      throw new Error('No query found');
+    }
+    query.onSuccess(JSON.stringify(data));
+  }
+
+  wuiMockFailureAllEvents(
+    failureErrorCode: number,
+    failureErrorMessage: string
+  ) {
     this.openPersistentQueries_.forEach(query => {
-      query.onFailure(10, 'mockError');
+      query.onFailure(failureErrorCode, failureErrorMessage);
     });
+  }
+
+  wuiMockFailureEvent(
+    eventName: string,
+    failureErrorCode: number,
+    errorMessage: string
+  ) {
+    // find the query that matches the event name, throw if none is found
+    const query = Array.from(this.openPersistentQueries_.values()).find(
+      query => this.getPersistentEventName(query) === eventName
+    );
+
+    if (!query) {
+      throw new Error('No query found');
+    }
+    query.onFailure(failureErrorCode, errorMessage);
   }
 }
 export function setupWuiMock(
