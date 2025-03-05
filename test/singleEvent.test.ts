@@ -1,6 +1,6 @@
 import { jestExport } from '../src/PersistentCallback';
 import { sendEvent } from '../src/index';
-import { WuiMock, setupWuiMock } from './wuiMock';
+import { TestMock, setupWuiMock } from '../src/TestMock';
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -8,7 +8,7 @@ afterEach(() => {
 });
 
 describe('test no throw', () => {
-  const wuiMock = new WuiMock(false, false, false, false);
+  const wuiMock = new TestMock(false, false, false, false);
 
   beforeEach(() => {
     setupWuiMock(wuiMock);
@@ -32,7 +32,7 @@ describe('test no throw', () => {
 });
 
 describe('test throw query', () => {
-  const wuiMock = new WuiMock(true, false, false, false);
+  const wuiMock = new TestMock(true, false, false, false);
 
   beforeEach(() => {
     setupWuiMock(wuiMock);
@@ -48,7 +48,7 @@ describe('test throw query', () => {
 });
 
 describe('test failure query', () => {
-  const wuiMock = new WuiMock(false, false, true, false);
+  const wuiMock = new TestMock(false, false, true, false);
 
   beforeEach(() => {
     setupWuiMock(wuiMock);

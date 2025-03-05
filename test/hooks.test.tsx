@@ -1,11 +1,11 @@
 import { renderHook } from '@testing-library/react';
 
 import { useEventListener } from '../src/hooks';
-import { WuiMock, setupWuiMock } from './wuiMock';
+import { TestMock, setupWuiMock } from '../src/TestMock';
 import { act } from 'react-dom/test-utils';
 
 describe('tests no throw persistent call', () => {
-  const mock = new WuiMock(false, false, false, false);
+  const mock = new TestMock(false, false, false, false);
   beforeEach(() => {
     setupWuiMock(mock);
   });
@@ -45,7 +45,7 @@ describe('tests no throw persistent call', () => {
 
 describe('tests failure no backend', () => {
   beforeEach(() => {
-    setupWuiMock(new WuiMock(true, false, false, false));
+    setupWuiMock(new TestMock(true, false, false, false));
   });
 
   test('failure on cancel', () => {

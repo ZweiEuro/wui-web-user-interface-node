@@ -1,7 +1,10 @@
-import { registerFailureCallback } from '../src';
-import { WuiQueryId, WuiQueryOptions } from '../src/types';
+import { registerFailureCallback } from '.';
+import { WuiQueryId, WuiQueryOptions } from './types';
 
-export class WuiMock {
+/**
+ * Helper class to mock and test WuiQuery and WuiQueryCancel
+ */
+export class TestMock {
   public wuiQueryIdGenerator: number = 0;
 
   private throwQuery_: boolean = false;
@@ -11,6 +14,16 @@ export class WuiMock {
 
   private openPersistentQueries_: Map<WuiQueryId, WuiQueryOptions> = new Map();
 
+  /**
+   * Create a new WuiMock
+   * The flags are only necessary if you want to simulate your webpages behavior in case of a 'environment' error,
+   * like running the webpage outside of the WUI environment.
+   *
+   * @param throwQuery Will cause wuiQuery to throw an error on _all_ requests.
+   * @param throwCancel Will cause wuiQueryCancel to throw an error on _all_ requests that have previously been requested that are persistent (receiver registration).
+   * @param failureSending Will cause wuiQuery to call the onFailure callback on _all_ non-persistent requests, hard-coded to 10 and 'mockError'.
+   * @param failureSubscribe Will cause wuiQuery to call the onFailure callback on _all_ persistent requests, hard-coded to 10 and 'mockError'.
+   */
   constructor(
     throwQuery: boolean,
     throwCancel: boolean,
@@ -40,6 +53,7 @@ export class WuiMock {
     const queryId = this.newQueryId();
     if (options.persistent) {
       if (this.failurePersistentQuery_) {
+        // this will land in the "failure callback" if one is registered
         options.onFailure(10, 'mockError');
         return -1 as WuiQueryId;
       } else {
@@ -47,6 +61,7 @@ export class WuiMock {
       }
     } else {
       if (this.failureNonPersistentQuery_) {
+        // this will cause the onFailure callback to be called, which in turn will cause a rejection
         options.onFailure(10, 'mockError');
       } else {
         options.onSuccess('{"mockSuccess": true}');
@@ -66,10 +81,6 @@ export class WuiMock {
       return false;
     }
 
-    if (this.failurePersistentQuery_) {
-      return false;
-    }
-
     // if it is found remove it return true
     this.openPersistentQueries_.delete(queryId);
     return true;
@@ -82,7 +93,9 @@ export class WuiMock {
   }
 
   /**
-   * Send event data to a previously opened query
+   * Send event data to a previously opened query. This simulates
+   * that WUI (from the backend) has sent data to the website.
+   * So the website is receiving the event
    *
    * @param eventName
    * @param data
@@ -124,10 +137,22 @@ export class WuiMock {
     query.onFailure(failureErrorCode, errorMessage);
   }
 }
+
+let activeMock: TestMock | undefined = undefined;
+
+/**
+ * Setup a mock for WuiQuery and WuiQueryCancel
+ * - Subsequent calls will overwrite the previous mock
+ * - This overwrites the global WuiQuery and WuiQueryCancel functions
+ *
+ * @param mock mock and settings to apply
+ * @param failureCb optional failure callback to register for _all_ persistent querie failures
+ * @returns the mock and the failure callback
+ */
 export function setupWuiMock(
-  mock: WuiMock,
+  mock: TestMock,
   failureCb?: Parameters<typeof registerFailureCallback>[0]
-): { mock: WuiMock; failureCb: typeof failureCb } {
+): { mock: TestMock; failureCb: typeof failureCb } {
   Object.defineProperties(window, {
     WuiQuery: {
       value: mock.wuiQuery.bind(mock),
@@ -143,8 +168,33 @@ export function setupWuiMock(
     registerFailureCallback(failureCb);
   }
 
+  activeMock = mock;
+
   return {
     mock: mock,
     failureCb: failureCb,
   };
+}
+
+/**
+ *
+ * @returns the active mock or throws if none is present
+ */
+export function getActiveMock(): TestMock {
+  if (!activeMock) {
+    throw new Error('No active mock, call setupWuiMock first');
+  }
+
+  return activeMock;
+}
+
+/**
+ * @brief Clears the active mock, if none is present it returns undefined
+ *
+ * @returns the active mock and clears it
+ */
+export function clearActiveMock(): TestMock | undefined {
+  const ret = activeMock;
+  activeMock = undefined;
+  return ret;
 }

@@ -1,8 +1,8 @@
 import { registerEventListener, unregisterEventListener } from '../src';
-import { jestExport } from '../src/PersistentCallback';
+import { getFailureCallback, jestExport } from '../src/PersistentCallback';
 import { unregisterFailureCallback } from '../src/index';
 
-import { WuiMock, setupWuiMock } from './wuiMock';
+import { TestMock, setupWuiMock } from '../src/TestMock';
 
 const listener = jest.fn((payload: any) => {
   expect(payload).toEqual({ mockSuccess: true });
@@ -14,7 +14,7 @@ const failureCallackMock = jest.fn((code: number, msg: string) => {
 });
 
 describe('tests no throw', () => {
-  const wuiMock = new WuiMock(false, false, false, false);
+  const wuiMock = new TestMock(false, false, false, false);
 
   beforeEach(() => {
     setupWuiMock(wuiMock);
@@ -78,23 +78,25 @@ describe('tests no throw', () => {
 });
 
 describe('tests failure callback', () => {
-  const wuiMock = new WuiMock(false, false, false, false);
+  const wuiMock = new TestMock(false, false, false, false);
 
   beforeEach(() => {
     setupWuiMock(wuiMock, failureCallackMock);
   });
 
-  it('failure on register and unregister', () => {
+  it('failure on register and unregister, check that getFailureCallback returns the correct one', () => {
     registerEventListener('test', listener);
 
-    wuiMock.wuiMockFailureAllEvents(10, 'mockError'); // send failure to everone
+    wuiMock.wuiMockFailureAllEvents(10, 'mockError'); // send failure to everyone
 
     // expect the failure callback to be called once
     expect(failureCallackMock).toHaveBeenCalledTimes(1);
 
+    expect(getFailureCallback()).toBe(failureCallackMock);
+
     unregisterFailureCallback();
 
-    wuiMock.wuiMockFailureAllEvents(10, 'mockError'); // send failure to everone
+    wuiMock.wuiMockFailureAllEvents(10, 'mockError'); // send failure to everyone
 
     // expect the failure callback to be called once
     expect(failureCallackMock).toHaveBeenCalledTimes(1);
@@ -105,7 +107,7 @@ describe('tests failure callback', () => {
 });
 
 describe('throw on cancel', () => {
-  const wuiMock = new WuiMock(false, true, false, false);
+  const wuiMock = new TestMock(false, true, false, false);
 
   beforeEach(() => {
     setupWuiMock(wuiMock, failureCallackMock);
@@ -121,7 +123,7 @@ describe('throw on cancel', () => {
 });
 
 describe('failure on cancel', () => {
-  const wuiMock = new WuiMock(false, false, false, true);
+  const wuiMock = new TestMock(false, false, false, true);
 
   beforeEach(() => {
     setupWuiMock(wuiMock, failureCallackMock);
@@ -135,5 +137,8 @@ describe('failure on cancel', () => {
 
     // expect the failure callback to be called twice
     expect(failureCallackMock).toHaveBeenCalledTimes(1);
+
+    // cancelling the query should also fail
+    expect(unregisterEventListener('test', listenerSymbol)).toBe(false);
   });
 });

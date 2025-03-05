@@ -137,6 +137,14 @@ export function unregisterFailureCallback(): void {
   failureCallback = undefined;
 }
 
+/**
+ *
+ * @returns the current failure callback
+ */
+export function getFailureCallback(): typeof failureCallback {
+  return failureCallback;
+}
+
 // Testing
 
 export const jestExport = {
