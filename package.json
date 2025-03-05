@@ -22,6 +22,14 @@
       "import": "./lib/index.js",
       "default": "./lib/index.js"
     },
+    "./types": {
+      "types": "./lib/types.d.ts",
+      "default": "./lib/types.js"
+    },
+    "./TestMock": {
+      "types": "./lib/TestMock.d.ts",
+      "default": "./lib/TestMock.js"
+    },
     "./hooks": {
       "types": "./lib/hooks.d.ts",
       "default": "./lib/hooks.js"
