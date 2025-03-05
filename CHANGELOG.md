@@ -1,3 +1,10 @@
+### [2.5.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.5.0...v2.5.1) (2025-03-05)
+
+
+### Bug Fixes
+
+* **package.json:** fix missingt type decalartions ([21791d4](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/21791d4339a83fca265ec89ca8350316f78c648f))
+
 ## [2.5.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.4.0...v2.5.0) (2025-03-05)
 
 
