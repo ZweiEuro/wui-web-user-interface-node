@@ -1,3 +1,10 @@
+## [2.5.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.4.0...v2.5.0) (2025-03-05)
+
+
+### Features
+
+* **testing subsystem:** add mocks for testing wui more easily ([1fdb0a9](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/1fdb0a959ff5e564916e974ea7b0978077ef6a46))
+
 ## [2.4.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.3.1...v2.4.0) (2024-07-29)
 
 ### [2.3.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.3.0...v2.3.1) (2024-07-28)
