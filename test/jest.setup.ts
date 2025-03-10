@@ -12,9 +12,12 @@ globalThis.console = {
 beforeAll(() => {
   jest.spyOn(global.console, 'warn').mockImplementation(() => {});
   jest.spyOn(global.console, 'error').mockImplementation(() => {});
+  jest.spyOn(globalThis, 'alert').mockImplementation(() => {});
 });
 
 afterEach(() => {
+  globalThis.localStorage.clear();
+
   jest.clearAllMocks();
   jestExport.resetCurrentPersistentQueriesToId();
 

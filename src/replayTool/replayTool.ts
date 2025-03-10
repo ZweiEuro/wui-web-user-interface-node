@@ -51,7 +51,7 @@ color:red;
 </div>
 `;
 
-let initialized = false;
+export let replayTool_is_initialized = false;
 
 // Settings box
 let fileName = document.getElementById('fileName');
@@ -86,16 +86,17 @@ function findAllDIVs() {
 }
 
 export function initializeReplayTool(): void {
-
   if (WuiSupported()) {
-    console.debug('WUI backend found, not initializing replay tool');
+    console.debug(
+      'WUI backend found, not initializing replay tool. Open the website in a browser without WUI backend to play replays.'
+    );
     return;
   }
 
-  if (initialized) {
+  if (replayTool_is_initialized) {
     return;
   } else {
-    initialized = true;
+    replayTool_is_initialized = true;
   }
 
   console.warn('WUI backend not found');
