@@ -31,7 +31,7 @@ WUI is only supported in the WUI library and its internal functions. Detected vi
 
 #### Defined in
 
-types.ts:34
+types.ts:36
 
 ___
 

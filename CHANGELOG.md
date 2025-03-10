@@ -1,3 +1,10 @@
+## [2.6.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.5.1...v2.6.0) (2025-03-10)
+
+
+### Features
+
+* **support debugability:** show an alert once a day outside of wui env ([fb1aaa7](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/fb1aaa7d49f6968b5036ceba8a4f84ef849e19bd))
+
 ### [2.5.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.5.0...v2.5.1) (2025-03-05)
 
 
