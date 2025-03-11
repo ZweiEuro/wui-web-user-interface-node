@@ -1,3 +1,7 @@
+## 3.4.0 (2025-03-11)
+
+* build(jsr publish): jSR mistake ([8b96a5c](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/8b96a5c))
+
 ## 3.3.0 (2025-03-11)
 
 * build(jsr publish): manually publish using deno ([b2df75a](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/b2df75a))
