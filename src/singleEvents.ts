@@ -1,4 +1,4 @@
-import { checkWuiSupported, makeRejectString } from './types';
+import { checkWuiSupported, makeRejectString, window_t } from './types';
 
 /**
  * @brief Send a single event to a backend destination which is listening for it.
@@ -13,7 +13,7 @@ export function sendEvent<
 >(eventName: string, payload: payload_t): Promise<successObject_t> {
   checkWuiSupported();
   return new Promise<successObject_t>((resolve, reject) => {
-    globalThis.window.WuiQuery({
+    (globalThis.window as unknown as window_t).WuiQuery({
       persistent: false,
       request: JSON.stringify({
         wuiEventName: eventName,

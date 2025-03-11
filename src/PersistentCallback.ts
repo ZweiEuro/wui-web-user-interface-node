@@ -1,4 +1,4 @@
-import { WuiQueryId, checkWuiSupported } from './types';
+import { WuiQueryId, checkWuiSupported, window_t } from './types';
 
 export class PersistentCallbacksManager {
   private queryId_: WuiQueryId | null = null;
@@ -32,7 +32,7 @@ export class PersistentCallbacksManager {
     this.dataCallbacks_.set(newSymbol, callback);
 
     if (this.queryId_ === null) {
-      this.queryId_ = globalThis.window.WuiQuery({
+      this.queryId_ = (globalThis.window as unknown as window_t).WuiQuery({
         persistent: true,
         request: JSON.stringify({ wuiEventName: this.eventName_ }),
         onSuccess: this.onData.bind(this),
@@ -52,7 +52,11 @@ export class PersistentCallbacksManager {
 
     if (this.dataCallbacks_.size === 0) {
       if (this.queryId_ !== null) {
-        if (globalThis.window.WuiQueryCancel(this.queryId_) === false) {
+        if (
+          (globalThis.window as unknown as window_t).WuiQueryCancel(
+            this.queryId_
+          ) === false
+        ) {
           console.error(
             'PersistentCallbacksManager.removeOnData: WuiQueryCancel failed.'
           );

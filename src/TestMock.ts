@@ -1,4 +1,4 @@
-import { registerFailureCallback } from './PersistentCallback';
+import { registerFailureCallback } from './index';
 import { WuiQueryId, WuiQueryOptions } from './types';
 
 /**

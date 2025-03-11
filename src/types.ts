@@ -9,12 +9,29 @@ export interface WuiQueryOptions {
 
 export type WuiQueryId = number & { __type: 'PositiveNumber' };
 
+/*
+Why is this commented out?
+A: Because deno does not allow global type augmentation https://jsr.io/docs/about-slow-types#global-augmentation 
+This is annoying but not THAT bad thankfully
+
 declare global {
   interface Window {
     WuiQuery: (options: WuiQueryOptions) => WuiQueryId; // returns the ID of the query
     WuiQueryCancel: (options: WuiQueryId) => boolean; // returns true if the query was cancelled
   }
 }
+
+// it makes ALL the window calls require an explicit cast
+((globalThis.window as unknown as window_t) as unknown as window_t).WuiQuery
+
+but thats not too bad, other than being really ugly
+
+*/
+
+export type window_t = {
+  WuiQuery: (options: WuiQueryOptions) => WuiQueryId; // returns the ID of the query
+  WuiQueryCancel: (options: WuiQueryId) => boolean; // returns true if the query was cancelled
+} & globalThis.Window;
 
 export function makeRejectString(
   errorCode: number,
@@ -35,8 +52,8 @@ export function makeRejectString(
  */
 export function WuiSupported(): boolean {
   if (
-    globalThis.window.WuiQuery === undefined ||
-    globalThis.window.WuiQueryCancel === undefined
+    (globalThis.window as unknown as window_t).WuiQuery === undefined ||
+    (globalThis.window as unknown as window_t).WuiQueryCancel === undefined
   ) {
     return false;
   }

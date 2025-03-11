@@ -1,5 +1,5 @@
 import { parse, ParseResult } from 'papaparse';
-import { WuiQueryId, WuiSupported } from '../types';
+import { window_t, WuiQueryId, WuiSupported } from '../types';
 import { replayToolExport } from '../PersistentCallback';
 
 const debugElementInnerHtml = `
@@ -102,11 +102,11 @@ export function initializeReplayTool(): void {
   console.warn('WUI backend not found');
 
   // mock away the global functions to avoid any crashes
-  globalThis.window.WuiQuery = options => {
+  (globalThis.window as unknown as window_t).WuiQuery = options => {
     void options;
     return 0 as WuiQueryId;
   };
-  globalThis.window.WuiQueryCancel = options => {
+  (globalThis.window as unknown as window_t).WuiQueryCancel = options => {
     void options;
     return false;
   };
