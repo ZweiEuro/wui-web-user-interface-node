@@ -1,0 +1,12 @@
+{
+    "name": "@wui/web-user-interface-lib",
+    "version": "3.0.0",
+    "license": "MIT",
+    "exports": {
+        ".": "./src/index.ts",
+        "./types": "./src/types.ts",
+        "./TestMock": "./src/TestMock.ts",
+        "./hooks": "./src/hooks.ts",
+        "./replayTool": "./src/replayTool/replayTool.ts"
+    }
+}
