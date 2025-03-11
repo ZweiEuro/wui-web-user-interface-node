@@ -31,7 +31,7 @@ WUI is only supported in the WUI library and its internal functions. Detected vi
 
 #### Defined in
 
-types.ts:36
+types.ts:53
 
 ___
 
@@ -62,7 +62,7 @@ Register a listener for a given event name.
 
 #### Defined in
 
-PersistentCallback.ts:93
+PersistentCallback.ts:97
 
 ___
 
@@ -86,7 +86,7 @@ register a single callback that is called when any persistent query fails. If no
 
 #### Defined in
 
-PersistentCallback.ts:127
+PersistentCallback.ts:131
 
 ___
 
@@ -147,7 +147,7 @@ Unregister a listener for a given event name.
 
 #### Defined in
 
-PersistentCallback.ts:112
+PersistentCallback.ts:116
 
 ___
 
@@ -165,4 +165,4 @@ unregister the failure callback
 
 #### Defined in
 
-PersistentCallback.ts:136
+PersistentCallback.ts:140
