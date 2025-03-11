@@ -133,7 +133,7 @@ ___
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `eventName` | `string` | for which the backend is listening |
-| `callbackIdentifier` | `symbol` | - |
+| `callbackIdentifier` | `symbol` | to call when the event is received |
 
 #### Returns
 
