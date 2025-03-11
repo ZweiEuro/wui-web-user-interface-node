@@ -5,39 +5,45 @@ module.exports = {
   branches: ['main', 'next'],
   plugins: [
     [
-      '@semantic-release/commit-analyzer',
-      {
-        preset: 'conventionalcommits',
-        releaseRules: [
-          {
-            breaking: true,
-            release: 'major',
+      [
+        '@semantic-release/commit-analyzer',
+        {
+          preset: 'conventionalcommits',
+          releaseRules: [
+            {
+              breaking: true,
+              release: 'major',
+            },
+            {
+              type: 'feat',
+              release: 'minor',
+            },
+            {
+              type: 'build',
+              release: 'minor',
+            },
+            {
+              type: 'fix',
+              release: 'patch',
+            },
+            {
+              type: 'docs',
+              scope: 'README',
+              release: 'patch',
+            },
+            {
+              type: 'chore',
+              release: 'patch',
+            },
+          ],
+          parserOpts: {
+            noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
           },
-          {
-            type: 'feat',
-            release: 'minor',
-          },
-          {
-            type: 'build',
-            release: 'minor',
-          },
-          {
-            type: 'fix',
-            release: 'patch',
-          },
-          {
-            type: 'docs',
-            scope: 'README',
-            release: 'patch',
-          },
-          {
-            type: 'chore',
-            release: 'patch',
-          },
-        ],
-        parserOpts: {
-          noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
         },
+      ],
+      '@sebbo2002/semantic-release-jsr',
+      {
+        publishArgs: ['--dry-run'],
       },
     ],
     [
