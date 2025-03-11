@@ -1,3 +1,14 @@
+## [3.0.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.6.0...v3.0.0) (2025-03-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **package name change:** The name needs to be adjusted in all package.json files
+
+### refactor
+
+* **package name change:** node was wrong in the package name, its a lib ([9a80556](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/9a8055669b05c6665d06e4e2839a7e6233de7f08))
+
 ## [2.6.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.5.1...v2.6.0) (2025-03-10)
 
 
