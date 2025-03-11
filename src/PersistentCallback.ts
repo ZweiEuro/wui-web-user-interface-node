@@ -108,7 +108,7 @@ export function registerEventListener<payload_t = Record<string, unknown>>(
  * @brief Unregister a listener for a given event name.
  *
  * @param eventName for which the backend is listening
- * @param callbackIdentifier to call when the event is received
+ * @param callbackIdentifier the previously returned identifier from registerEventListener
  *
  * @returns true if the callback was removed, false otherwise (e.g. if it was not registered)
  *

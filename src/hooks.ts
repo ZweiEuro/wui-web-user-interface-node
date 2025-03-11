@@ -1,3 +1,8 @@
+/**
+ * Helper hook definitions for use in react functional components.
+ * @module
+ */
+
 import { useEffect, useState } from 'react';
 import {
   registerEventListener,

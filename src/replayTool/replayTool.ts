@@ -1,3 +1,8 @@
+/**
+ * Part of the testing system. Module to operate/enable the replay tool.
+ * Can replay events from a previously saved '.wlog' file.
+ * @module
+ */
 import { parse, ParseResult } from 'papaparse';
 import { window_t, WuiQueryId, WuiSupported } from '../types';
 import { replayToolExport } from '../PersistentCallback';
@@ -85,6 +90,12 @@ function findAllDIVs() {
   replayName = document.getElementById('replayName');
 }
 
+/**
+ * Enable the replay tool. Must be called before *any* other function inside WUI.
+ * Will enable a top-side overlay to load and start replays.
+ *
+ * @returns
+ */
 export function initializeReplayTool(): void {
   if (WuiSupported()) {
     console.debug(

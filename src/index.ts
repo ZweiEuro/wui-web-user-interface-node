@@ -1,3 +1,8 @@
+/**
+ * Main module for WUI event handling, registration and dispatching of events.
+ * @module
+ */
+
 export { WuiSupported } from './types';
 
 export {

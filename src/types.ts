@@ -1,3 +1,7 @@
+/**
+ * Type definition for query options and support querying.
+ * @module
+ */
 import { replayTool_is_initialized } from './replayTool/replayTool';
 
 export interface WuiQueryOptions {

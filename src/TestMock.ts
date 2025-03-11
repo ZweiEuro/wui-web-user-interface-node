@@ -1,3 +1,8 @@
+/**
+ * Part of the testing system. Helper module for mocking WUI queries and cancels and events directly.
+ * Used to imitate the backend environment for testing and reproducing UI bugs.
+ * @module
+ */
 import { registerFailureCallback } from './index';
 import { WuiQueryId, WuiQueryOptions } from './types';
 
