@@ -1,3 +1,10 @@
+### [3.2.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v3.2.0...v3.2.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* **ci:** jSR CI ([ac1a724](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/ac1a724ad4bf70eb8ce5d26e193764c680419dc0))
+
 ## [3.2.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v3.1.0...v3.2.0) (2025-03-11)
 
 ## [3.1.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v3.0.0...v3.1.0) (2025-03-11)
