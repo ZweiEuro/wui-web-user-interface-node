@@ -71,7 +71,7 @@ publish-npm:
       fi
     - npm run build --cache .npm
     - npm run genDocs --cache .npm
-    - npm run semantic-release --cache .npm
+    - npm run semantic-release --cache .npm -- --token ${JSR_CI_TOKEN}
   only:
     - main
   tags:
