@@ -16,28 +16,11 @@
     "url": "https://zweieuro.at"
   },
   "exports": {
-    ".": {
-      "types": "./lib/index.d.ts",
-      "require": "./lib/index.js",
-      "import": "./lib/index.js",
-      "default": "./lib/index.js"
-    },
-    "./types": {
-      "types": "./lib/types.d.ts",
-      "default": "./lib/types.js"
-    },
-    "./TestMock": {
-      "types": "./lib/TestMock.d.ts",
-      "default": "./lib/TestMock.js"
-    },
-    "./hooks": {
-      "types": "./lib/hooks.d.ts",
-      "default": "./lib/hooks.js"
-    },
-    "./replayTool": {
-      "types": "./lib/replayTool/replayTool.d.ts",
-      "default": "./lib/replayTool/replayTool.js"
-    }
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts",
+    "./TestMock": "./src/TestMock.ts",
+    "./hooks": "./src/hooks.ts",
+    "./replayTool": "./src/replayTool/replayTool.ts"
   },
   "files": [
     "lib"
