@@ -1,3 +1,9 @@
+## 3.3.0 (2025-03-11)
+
+* build(jsr publish): manually publish using deno ([b2df75a](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/b2df75a))
+* build(jsr): jSR publish ([111cab0](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/111cab0))
+* Update .gitlab-ci.yml file ([26e01a6](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/26e01a6))
+
 ### [3.2.1](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v3.2.0...v3.2.1) (2025-03-11)
 
 
