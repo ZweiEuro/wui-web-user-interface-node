@@ -1,3 +1,7 @@
+## 3.5.0 (2025-03-11)
+
+* build(jsr): gitlab CI needs allow-dirty ([930f95b](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/930f95b))
+
 ## 3.4.0 (2025-03-11)
 
 * build(jsr publish): jSR mistake ([8b96a5c](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/8b96a5c))
