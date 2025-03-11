@@ -105,6 +105,5 @@ module.exports = {
           'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
-    '@sebbo2002/semantic-release-jsr',
   ],
 };

@@ -1,4 +1,4 @@
-import { replayTool_is_initialized } from './replayTool/replayTool';
+import { replayTool_is_initialized } from './replayTool/replayTool.ts';
 
 export interface WuiQueryOptions {
   persistent: boolean; // true means it can "resolve" multiple times

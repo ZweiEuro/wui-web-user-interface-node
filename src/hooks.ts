@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   registerEventListener,
   unregisterEventListener,
-} from './PersistentCallback';
+} from './PersistentCallback.ts';
 
 export function useEventListener<T extends Record<string, unknown>>(
   eventName: string

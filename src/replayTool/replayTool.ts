@@ -1,6 +1,6 @@
 import { parse, ParseResult } from 'papaparse';
-import { window_t, WuiQueryId, WuiSupported } from '../types';
-import { replayToolExport } from '../PersistentCallback';
+import { window_t, WuiQueryId, WuiSupported } from '../types.ts';
+import { replayToolExport } from '../PersistentCallback.ts';
 
 const debugElementInnerHtml = `
 <div style="

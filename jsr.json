@@ -1,6 +1,6 @@
 {
     "name": "@wui/web-user-interface-lib",
-    "version": "3.0.1",
+    "version": "1",
     "license": "MIT",
     "exports": {
         ".": "./src/index.ts",
@@ -8,5 +8,11 @@
         "./TestMock": "./src/TestMock.ts",
         "./hooks": "./src/hooks.ts",
         "./replayTool": "./src/replayTool/replayTool.ts"
+    },
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "esnext"
+        ]
     }
 }

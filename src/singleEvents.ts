@@ -1,4 +1,4 @@
-import { checkWuiSupported, makeRejectString, window_t } from './types';
+import { checkWuiSupported, makeRejectString, window_t } from './types.ts';
 
 /**
  * @brief Send a single event to a backend destination which is listening for it.

@@ -1,4 +1,4 @@
-import { WuiQueryId, checkWuiSupported, window_t } from './types';
+import { WuiQueryId, checkWuiSupported, window_t } from './types.ts';
 
 export class PersistentCallbacksManager {
   private queryId_: WuiQueryId | null = null;
