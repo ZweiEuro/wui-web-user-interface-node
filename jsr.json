@@ -1,6 +1,6 @@
 {
     "name": "@wui/web-user-interface-lib",
-    "version": "1",
+    "version": "x.x.x",
     "license": "MIT",
     "exports": {
         ".": "./src/index.ts",

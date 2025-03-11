@@ -74,7 +74,7 @@ publish-npm:
     - npm run semantic-release --cache .npm
     # Write the npm package version into the jsr.json file
     - "sed -i  \"3s/.*/    \"version\": \"${NPM_PACKAGE_VERSION}\",/\" jsr.json"
-    - npx deno publish --token ${JSR_CI_TOKEN}
+    - npx deno publish --token ${JSR_CI_TOKEN} --unstable-sloppy-imports
   only:
     - main
   tags:

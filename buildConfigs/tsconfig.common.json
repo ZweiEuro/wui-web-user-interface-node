@@ -19,8 +19,7 @@
     "strict": false,
     "strictNullChecks": true,
     "target": "ES2022",
-    "types": ["node", "jest", "react"],
-    "allowImportingTsExtensions": true
+    "types": ["node", "jest", "react"]
   },
   "exclude": ["../node_modules", "../lib"],
   "include": ["../src"]

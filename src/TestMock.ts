@@ -1,5 +1,5 @@
-import { registerFailureCallback } from './index.ts';
-import { WuiQueryId, WuiQueryOptions } from './types.ts';
+import { registerFailureCallback } from './index';
+import { WuiQueryId, WuiQueryOptions } from './types';
 
 /**
  * Helper class to mock and test WuiQuery and WuiQueryCancel

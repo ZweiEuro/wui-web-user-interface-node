@@ -1,10 +1,10 @@
-export { WuiSupported } from './types.ts';
+export { WuiSupported } from './types';
 
 export {
   unregisterEventListener,
   registerEventListener,
   registerFailureCallback,
   unregisterFailureCallback,
-} from './PersistentCallback.ts';
+} from './PersistentCallback';
 
-export { sendEvent } from './singleEvents.ts';
+export { sendEvent } from './singleEvents';
