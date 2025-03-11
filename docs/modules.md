@@ -1,6 +1,6 @@
-[@wui/web-user-interface-node](README.md) / Exports
+[@wui/web-user-interface-lib](README.md) / Exports
 
-# @wui/web-user-interface-node
+# @wui/web-user-interface-lib
 
 ## Table of contents
 

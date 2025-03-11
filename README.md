@@ -12,5 +12,5 @@ This is the node backend of WUI. Go https://wui.pages.zweieuro.at/web-user-inter
 and install it to your project as a **dependency**:
 
 ```bash
-npm i @wui/web-user-interface-node
+npm i @wui/web-user-interface-lib
 ```
