@@ -39,7 +39,6 @@ module.exports = {
           noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
         },
       },
-      '@sebbo2002/semantic-release-jsr',
     ],
     [
       '@semantic-release/release-notes-generator',
