@@ -1,3 +1,15 @@
+## [3.1.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v3.0.0...v3.1.0) (2025-03-11)
+
+
+### Features
+
+* **add jsr:** add jsr config ([40666fb](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/40666fb211f6a5f3c6245e946deffea11c740fd4))
+
+
+### Miscellaneous Chores
+
+* **remove jsr plugin from semantic:** remove JSR plugin ([466d873](https://gitlab.zweieuro.at/wui/web-user-interface-node/commit/466d873211f62da8faacde4d8787045ece7baca4))
+
 ## [3.0.0](https://gitlab.zweieuro.at/wui/web-user-interface-node/compare/v2.6.0...v3.0.0) (2025-03-11)
 
 
