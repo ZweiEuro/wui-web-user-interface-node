@@ -5,45 +5,39 @@ module.exports = {
   branches: ['main', 'next'],
   plugins: [
     [
-      [
-        '@semantic-release/commit-analyzer',
-        {
-          preset: 'conventionalcommits',
-          releaseRules: [
-            {
-              breaking: true,
-              release: 'major',
-            },
-            {
-              type: 'feat',
-              release: 'minor',
-            },
-            {
-              type: 'build',
-              release: 'minor',
-            },
-            {
-              type: 'fix',
-              release: 'patch',
-            },
-            {
-              type: 'docs',
-              scope: 'README',
-              release: 'patch',
-            },
-            {
-              type: 'chore',
-              release: 'patch',
-            },
-          ],
-          parserOpts: {
-            noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
-          },
-        },
-      ],
-      '@sebbo2002/semantic-release-jsr',
+      '@semantic-release/commit-analyzer',
       {
-        publishArgs: ['--dry-run'],
+        preset: 'conventionalcommits',
+        releaseRules: [
+          {
+            breaking: true,
+            release: 'major',
+          },
+          {
+            type: 'feat',
+            release: 'minor',
+          },
+          {
+            type: 'build',
+            release: 'minor',
+          },
+          {
+            type: 'fix',
+            release: 'patch',
+          },
+          {
+            type: 'docs',
+            scope: 'README',
+            release: 'patch',
+          },
+          {
+            type: 'chore',
+            release: 'patch',
+          },
+        ],
+        parserOpts: {
+          noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
+        },
       },
     ],
     [
@@ -109,6 +103,12 @@ module.exports = {
         assets: ['package.json', 'CHANGELOG.md', 'docs/*'],
         message:
           'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
+      },
+    ],
+    [
+      '@sebbo2002/semantic-release-jsr',
+      {
+        publishArgs: ['--dry-run'],
       },
     ],
   ],
